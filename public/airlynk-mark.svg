@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" aria-hidden="true">
+  <defs>
+    <linearGradient id="airlynk-mark" x1="0" y1="0" x2="1024" y2="1024" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4d7dff" />
+      <stop offset="1" stop-color="#1fa7d9" />
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="288" fill="url(#airlynk-mark)" />
+  <rect x="16" y="16" width="992" height="992" rx="278" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="24" />
+  <!-- The AirLynk "A-arrow": apex, two legs, crossbar — symmetric about x=512. -->
+  <path
+    d="M288 688 L512 288 L736 688 M371.2 544 L652.8 544"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="83"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

@@ -1,0 +1,458 @@
+@import "tailwindcss";
+@import "./motion.css";
+@import "./animotion.css";
+
+/* ==========================================================================
+   AirLynk website design system.
+   Inherited from the desktop app's dark "atmosphere" theme:
+   near-black background, aurora glows, glass surfaces, one blue→cyan accent.
+   ========================================================================== */
+
+@theme {
+  --color-bg: #06080d;
+  --color-bg-raise: #0b0e15;
+  --color-ink: #eef2fa;
+  --color-ink-2: #a3aec2;
+  --color-ink-3: #67728a;
+  --color-accent: #5b8cff;
+  --color-accent-2: #2fd0ff;
+  --color-mint: #4cd98a;
+  --color-amber: #f0b454;
+  --color-coral: #ff8080;
+
+  --font-sans: var(--font-outfit), "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "Cascadia Mono", monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---- Base ---------------------------------------------------------------- */
+
+html {
+  scroll-behavior: smooth;
+  /* Stop any horizontal scrolling on phones. `clip` (modern) has no
+     scroll-container side-effects; `hidden` is the fallback for old Safari. */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgb(91 140 255 / 0.35);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+/* ---- Layout helpers ------------------------------------------------------- */
+
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@media (min-width: 1280px) {
+  .wrap {
+    max-width: 1200px;
+  }
+}
+
+/* ---- Surfaces (glass, from the app) --------------------------------------- */
+
+.glass {
+  background: rgb(255 255 255 / 0.035);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.05),
+    0 20px 60px rgb(0 0 0 / 0.45);
+}
+
+.glass-deep {
+  background: rgb(13 17 26 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.09);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.06),
+    0 32px 90px rgb(0 0 0 / 0.6);
+}
+
+.hairline {
+  border: 1px solid rgb(255 255 255 / 0.08);
+}
+
+/* Accent-tinted border gradient (top-lit edge) */
+.edge-lit {
+  position: relative;
+}
+.edge-lit::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgb(120 160 255 / 0.35),
+    rgb(120 160 255 / 0.06) 40%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ---- Typography ----------------------------------------------------------- */
+
+.text-gradient {
+  background: linear-gradient(100deg, #eef2fa 20%, #9db9ff 55%, #2fd0ff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.accent-gradient {
+  background: linear-gradient(120deg, var(--color-accent), var(--color-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* ---- Buttons --------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 12px;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--ease-out-expo),
+    box-shadow 0.25s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, #3565ff, #1e9edb);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 2px 8px rgb(6 12 30 / 0.5),
+    0 10px 34px rgb(47 107 255 / 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 4px 12px rgb(6 12 30 / 0.5),
+    0 16px 44px rgb(47 107 255 / 0.5);
+}
+
+.btn-secondary {
+  color: var(--color-ink);
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.12);
+}
+.btn-secondary:hover {
+  background: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  color: var(--color-ink-2);
+  padding: 0 14px;
+}
+.btn-ghost:hover {
+  color: var(--color-ink);
+}
+
+/* ---- The one irresistible download button ---------------------------------- */
+
+.btn-download {
+  position: relative;
+  overflow: hidden;
+  height: 58px;
+  padding: 0 36px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: linear-gradient(135deg, #3565ff, #1e9edb);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 2px 10px rgb(6 12 30 / 0.5),
+    0 16px 48px rgb(47 107 255 / 0.4);
+  transition:
+    transform 0.3s var(--ease-out-expo),
+    box-shadow 0.3s ease;
+}
+
+/* shine sweep on hover */
+.btn-download::after {
+  content: "";
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  width: 55%;
+  background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.38), transparent);
+  transform: translateX(-140%) skewX(-14deg);
+  transition: transform 0.7s var(--ease-out-expo);
+  pointer-events: none;
+}
+.btn-download:hover::after {
+  transform: translateX(260%) skewX(-14deg);
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.28),
+    0 4px 14px rgb(6 12 30 / 0.5),
+    0 22px 64px rgb(47 107 255 / 0.55);
+}
+.btn-download:active {
+  transform: scale(0.96);
+}
+.btn-download:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.4) brightness(0.75);
+  transform: none;
+}
+
+/* phones: shrink the hero CTA so "Download for Windows · size" never clips */
+.btn-download {
+  max-width: 100%;
+}
+@media (max-width: 420px) {
+  .btn-download {
+    height: 54px;
+    padding: 0 22px;
+    font-size: 15.5px;
+    gap: 10px;
+  }
+}
+
+/* soft breathing glow behind the primary CTA */
+.dl-glow {
+  position: absolute;
+  inset: -18px -10px;
+  border-radius: 24px;
+  background: radial-gradient(55% 90% at 50% 50%, rgb(47 107 255 / 0.45), transparent 70%);
+  filter: blur(18px);
+  animation: glow-breathe 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ---- Chips / badges -------------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 30px;
+  padding: 0 13px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--color-ink-2);
+  background: rgb(255 255 255 / 0.045);
+  border: 1px solid rgb(255 255 255 / 0.09);
+  white-space: nowrap;
+}
+
+.chip-accent {
+  color: #cfe0ff;
+  background: rgb(91 140 255 / 0.1);
+  border-color: rgb(91 140 255 / 0.28);
+}
+
+/* ---- Atmosphere backdrop: aurora + grid + noise (mirrors the app) ---------- */
+
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora::before,
+.aurora::after {
+  content: "";
+  position: absolute;
+  width: 110vmax;
+  height: 110vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+}
+.aurora::before {
+  top: -55%;
+  left: -18%;
+  background: radial-gradient(closest-side, rgb(77 125 255 / 0.17), transparent 70%);
+  animation: drift1 26s ease-in-out infinite alternate;
+}
+.aurora::after {
+  top: -48%;
+  right: -22%;
+  background: radial-gradient(closest-side, rgb(0 190 255 / 0.11), transparent 70%);
+  animation: drift2 32s ease-in-out infinite alternate;
+}
+
+.grid-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, black 15%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 65% at 50% 0%, black 15%, transparent 78%);
+}
+
+.noise-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---- Radar — concentric pulses, straight from the app ---------------------- */
+
+.radar {
+  position: absolute;
+  inset: -14px;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.radar span {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent);
+  opacity: 0;
+  animation: radar 2.8s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+.radar span:nth-child(2) { animation-delay: 0.95s; }
+.radar span:nth-child(3) { animation-delay: 1.9s; }
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-mint);
+  flex: none;
+  position: relative;
+}
+.pulse-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid var(--color-mint);
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ---- App mockup ------------------------------------------------------------- */
+
+.mac-window {
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgb(10 13 20 / 0.88);
+}
+
+.traffic span {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+
+.qr-tile {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.progress-track {
+  height: 5px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+  overflow: hidden;
+  flex: 1;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  position: relative;
+  transition: width 0.6s var(--ease-out-expo);
+}
+.progress-fill.indeterminate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent);
+  animation: shine-sweep 1.6s ease-in-out infinite;
+}
+
+.nav-item-mock {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  color: var(--color-ink-3);
+}
+.nav-item-mock.active {
+  color: var(--color-ink);
+  background: rgb(91 140 255 / 0.14);
+}
+

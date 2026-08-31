@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# installer binaries — served from the Cloudflare R2 bucket, not from git
+# (repo files top out at 100 MB; Pages caps a single asset at 25 MiB)
+public/downloads/

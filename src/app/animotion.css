@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Animotion — CSS3 Animation Library (vendored subset)
+   Source: https://animotion-mcp.github.io (MIT)
+   Only the animations this site uses are vendored, adapted to AirLynk tokens.
+   Classes follow the Animotion API: .animotion-<name> + delay/duration modifiers.
+   ========================================================================== */
+
+@keyframes animotion-fade-in-up {
+  from { opacity: 0; transform: translate3d(0, 40px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes animotion-fade-in-left {
+  from { opacity: 0; transform: translate3d(-40px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes animotion-fade-in-right {
+  from { opacity: 0; transform: translate3d(40px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes animotion-blur-reveal {
+  from { opacity: 0; filter: blur(14px); transform: translate3d(0, 24px, 0) scale(0.985); }
+  to   { opacity: 1; filter: blur(0);    transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes animotion-zoom-in {
+  from { opacity: 0; transform: scale3d(0.86, 0.86, 0.86); }
+  to   { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+@keyframes animotion-bounce-in {
+  0%   { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+  55%  { opacity: 1; transform: scale3d(1.06, 1.06, 1.06); }
+  75%  { transform: scale3d(0.985, 0.985, 0.985); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+
+@keyframes animotion-clip-wipe-up {
+  from { clip-path: inset(100% 0 0 0); transform: translateY(14px); }
+  to   { clip-path: inset(0 0 0 0);    transform: translateY(0); }
+}
+
+@keyframes animotion-shimmer-text {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+@keyframes animotion-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* ---- Classes ------------------------------------------------------------- */
+
+.animotion-fade-in-up  { animation: animotion-fade-in-up 0.7s var(--ease-out-expo, ease-out) both; }
+.animotion-fade-in-left  { animation: animotion-fade-in-left 0.7s var(--ease-out-expo, ease-out) both; }
+.animotion-fade-in-right { animation: animotion-fade-in-right 0.7s var(--ease-out-expo, ease-out) both; }
+.animotion-blur-reveal { animation: animotion-blur-reveal 0.9s var(--ease-out-expo, ease-out) both; }
+.animotion-zoom-in     { animation: animotion-zoom-in 0.6s var(--ease-out-expo, ease-out) both; }
+.animotion-bounce-in   { animation: animotion-bounce-in 0.75s cubic-bezier(0.215, 0.61, 0.355, 1) both; }
+.animotion-clip-wipe-up { animation: animotion-clip-wipe-up 0.8s var(--ease-out-expo, ease-out) both; }
+.animotion-float       { animation: animotion-float 3s ease-in-out infinite; }
+
+/* Shimmering gradient text (Animotion text effect, AirLynk palette) */
+.animotion-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    rgb(238 242 250 / 0.55) 0%,
+    rgb(238 242 250 / 0.55) 40%,
+    #2fd0ff 50%,
+    rgb(238 242 250 / 0.55) 60%,
+    rgb(238 242 250 / 0.55) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: animotion-shimmer-text 5s linear infinite;
+}
+
+/* ---- Modifiers ------------------------------------------------------------ */
+
+.animotion-delay-100 { animation-delay: 100ms; }
+.animotion-delay-200 { animation-delay: 200ms; }
+.animotion-delay-300 { animation-delay: 300ms; }
+.animotion-delay-400 { animation-delay: 400ms; }
+.animotion-delay-500 { animation-delay: 500ms; }
+.animotion-delay-600 { animation-delay: 600ms; }
+.animotion-delay-700 { animation-delay: 700ms; }
