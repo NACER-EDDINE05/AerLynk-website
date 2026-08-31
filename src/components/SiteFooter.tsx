@@ -65,7 +65,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/8 pt-7 sm:flex-row sm:items-center">
           <p className="text-[12.5px] text-ink-3">
-            © {new Date().getFullYear()} {site.author}. AirLynk is open source under {site.license}.
+            © {new Date().getFullYear()} {site.author}. AerLynk is open source under {site.license}.
           </p>
           <a
             href={site.authorUrl}

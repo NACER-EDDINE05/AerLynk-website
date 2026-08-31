@@ -74,7 +74,7 @@ function Sidebar() {
     <aside className="hidden w-[150px] shrink-0 flex-col border-r border-white/8 bg-white/2 p-2.5 sm:flex">
       <div className="flex items-center gap-2 px-1.5 pb-4 pt-1">
         <LogoMark size={18} />
-        <span className="text-[12px] font-semibold text-ink">AirLynk</span>
+        <span className="text-[12px] font-semibold text-ink">AerLynk</span>
       </div>
       <nav className="flex flex-col gap-0.5">
         {items.map(({ icon: Icon, label, active }) => (
@@ -103,7 +103,7 @@ function TitleBar() {
         <span className="bg-[#febc2e]" />
         <span className="bg-[#28c840]" />
       </div>
-      <span className="flex-1 text-center text-[11.5px] font-medium text-ink-3">AirLynk</span>
+      <span className="flex-1 text-center text-[11.5px] font-medium text-ink-3">AerLynk</span>
       <span className="hidden font-mono text-[10px] text-ink-3 md:block">192.168.1.24:52841</span>
     </div>
   );
@@ -117,7 +117,7 @@ function SendMain() {
       </div>
       <div className="flex flex-col gap-2">
         <FileRow name="quarterly-report.pdf" size="24.8 MB" pct={100} done />
-        <FileRow name="airlynk-demos-4k.mov" size="1.9 GB" pct={64} />
+        <FileRow name="aerlynk-demos-4k.mov" size="1.9 GB" pct={64} />
         <FileRow name="incident-0142.png" size="8.1 MB" pct={0} />
       </div>
     </div>
@@ -143,7 +143,7 @@ function ReceiveMain() {
 
 function HistoryMain() {
   const rows = [
-    { dir: "↑", name: "airlynk-0.1.1-setup.exe", meta: "82.4 MB · to phone · today 14:02" },
+    { dir: "↑", name: "aerlynk-0.1.1-setup.exe", meta: "82.4 MB · to phone · today 14:02" },
     { dir: "↓", name: "IMG_2026_0829.jpg", meta: "4.2 MB · from phone · today 09:41" },
     { dir: "↑", name: "group-photo-final.png", meta: "11.7 MB · to phone · yesterday" },
     { dir: "↓", name: "recording-042.m4a", meta: "38.0 MB · from phone · yesterday" },

@@ -23,7 +23,7 @@ export function PhoneMockup({ className = "" }: { className?: string }) {
         <div className="flex items-center gap-2 px-4 pt-3.5 pb-3">
           <LogoMark size={20} />
           <div>
-            <div className="text-[12px] font-semibold text-ink">AirLynk</div>
+            <div className="text-[12px] font-semibold text-ink">AerLynk</div>
             <div className="font-mono text-[8.5px] tracking-wide text-ink-3">sealed transfer</div>
           </div>
           <span className="ml-auto rounded-full border border-mint/25 bg-mint/10 px-2 py-0.5 font-mono text-[8px] text-mint">
@@ -41,7 +41,7 @@ export function PhoneMockup({ className = "" }: { className?: string }) {
             <span className="font-mono text-[17px] font-semibold tracking-[0.08em] text-ink">K7-M4</span>
             <span className="text-[8.5px] text-ink-3">verified</span>
           </div>
-          <div className="mt-2.5 truncate text-[10.5px] text-ink-2">airlynk-demos-4k.mov</div>
+          <div className="mt-2.5 truncate text-[10.5px] text-ink-2">aerlynk-demos-4k.mov</div>
           <div className="progress-track mt-1.5">
             <div className="progress-fill indeterminate" style={{ width: "64%" }} />
           </div>

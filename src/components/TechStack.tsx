@@ -38,7 +38,7 @@ export function TechStack() {
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
               <code className="flex-1 font-mono text-[12px] leading-6 text-ink-2">
                 <span className="text-ink-3">$ </span>
-                cargo build -p airlynk-crypto --target wasm32-unknown-unknown
+                cargo build -p aerlynk-crypto --target wasm32-unknown-unknown
                 <br />
                 <span className="text-ink-3">$ </span>
                 node scripts/wasm-cross-check.mjs

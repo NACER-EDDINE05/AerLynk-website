@@ -5,7 +5,7 @@ import { testimonials } from "@/lib/content";
 
 /**
  * Placeholder voices, clearly flagged as development demo content —
- * to be replaced with real quotes once AirLynk has users.
+ * to be replaced with real quotes once AerLynk has users.
  */
 export function Testimonials() {
   return (

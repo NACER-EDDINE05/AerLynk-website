@@ -1,6 +1,6 @@
-# AirLynk Website
+# AerLynk Website
 
-The official marketing site for [AirLynk](https://github.com/NACER1-EDDINE/AirLynk) — a desktop app that moves files between a PC and any phone on the same Wi-Fi, encrypted end to end with AES-256-GCM.
+The official marketing site for [AerLynk](https://github.com/NACER1-EDDINE/AerLynk) — a desktop app that moves files between a PC and any phone on the same Wi-Fi, encrypted end to end with AES-256-GCM.
 
 ## Stack
 

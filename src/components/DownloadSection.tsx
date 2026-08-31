@@ -168,7 +168,7 @@ export function DownloadSection() {
                   <div className="w-full max-w-sm rounded-2xl border border-dashed border-white/14 bg-white/2 p-5 text-center">
                     <Apple size={22} className="mx-auto mb-2 text-ink-3" aria-hidden />
                     <p className="text-[13.5px] leading-relaxed text-ink-2">
-                      AirLynk currently builds for Windows and Linux. A macOS build is on the
+                      AerLynk currently builds for Windows and Linux. A macOS build is on the
                       roadmap.
                     </p>
                     <a
@@ -250,7 +250,7 @@ export function DownloadSection() {
                 Build it yourself
               </h3>
               <p className="text-[13px] leading-relaxed text-ink-2">
-                Prefer to compile the bytes you run? AirLynk is MIT-licensed and builds in the
+                Prefer to compile the bytes you run? AerLynk is MIT-licensed and builds in the
                 open — clone the repository, audit every line, and produce the same binaries the
                 CI workflow ships. A Rust toolchain and Tauri 2 are all you need.
               </p>

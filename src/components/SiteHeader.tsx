@@ -15,7 +15,7 @@ import { site } from "@/lib/site";
 const LINKS = [
   { href: "/features", label: "Features", match: "/features" },
   { href: "/features#how-it-works", label: "How it works" },
-  { href: "/features#why", label: "Why AirLynk" },
+  { href: "/features#why", label: "Why AerLynk" },
   { href: "/features#stack", label: "Stack" },
   { href: "/download", label: "Download", match: "/download" },
   { href: "/download#faq", label: "FAQ" },
@@ -42,7 +42,7 @@ export function SiteHeader() {
       }`}
     >
       <div className="wrap flex h-16 items-center justify-between">
-        <Link href="/" aria-label="AirLynk home" className="rounded-lg">
+        <Link href="/" aria-label="AerLynk home" className="rounded-lg">
           <Logo />
         </Link>
 
@@ -70,7 +70,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-ghost h-9! text-[13.5px]"
-            aria-label="AirLynk on GitHub"
+            aria-label="AerLynk on GitHub"
           >
             <Github size={16} aria-hidden />
             Star

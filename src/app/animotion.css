@@ -1,7 +1,7 @@
 /* ==========================================================================
    Animotion — CSS3 Animation Library (vendored subset)
    Source: https://animotion-mcp.github.io (MIT)
-   Only the animations this site uses are vendored, adapted to AirLynk tokens.
+   Only the animations this site uses are vendored, adapted to AerLynk tokens.
    Classes follow the Animotion API: .animotion-<name> + delay/duration modifiers.
    ========================================================================== */
 
@@ -63,7 +63,7 @@
 .animotion-clip-wipe-up { animation: animotion-clip-wipe-up 0.8s var(--ease-out-expo, ease-out) both; }
 .animotion-float       { animation: animotion-float 3s ease-in-out infinite; }
 
-/* Shimmering gradient text (Animotion text effect, AirLynk palette) */
+/* Shimmering gradient text (Animotion text effect, AerLynk palette) */
 .animotion-shimmer-text {
   background: linear-gradient(
     90deg,

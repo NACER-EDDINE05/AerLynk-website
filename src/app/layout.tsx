@@ -92,7 +92,7 @@ const jsonLd = {
 
 /**
  * Old one-pager anchors that may still be shared around the web
- * (airlynk.dev/#faq etc.). The inline script in the body forwards them
+ * (aerlynk.dev/#faq etc.). The inline script in the body forwards them
  * to the new routes before paint.
  */
 const LEGACY_ANCHOR_MAP: Record<string, string> = {

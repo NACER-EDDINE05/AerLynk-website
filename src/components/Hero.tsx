@@ -92,7 +92,7 @@ export function Hero() {
 
           <Reveal animation="animotion-fade-in-up" delay={220}>
             <p className="mx-auto mt-6 max-w-2xl text-pretty text-[16.5px] leading-relaxed text-ink-2 sm:text-[18px]">
-              AirLynk moves files between your PC and any phone on the same Wi-Fi. Every byte is
+              AerLynk moves files between your PC and any phone on the same Wi-Fi. Every byte is
               encrypted with AES-256-GCM before it leaves the device — the key travels only inside
               the QR code. No accounts. No cloud. No phone app.
             </p>

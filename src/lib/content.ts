@@ -32,7 +32,7 @@ export const features = [
   {
     id: "discovery",
     title: "Finds the real network",
-    body: "AirLynk picks the actual Wi-Fi adapter and filters the fake ones — VPNs, WSL, Hyper-V, Docker — so the QR always points somewhere reachable.",
+    body: "AerLynk picks the actual Wi-Fi adapter and filters the fake ones — VPNs, WSL, Hyper-V, Docker — so the QR always points somewhere reachable.",
     visual: "radar" as const,
   },
   {
@@ -53,7 +53,7 @@ export const steps = [
   {
     id: "start",
     title: "Start a session",
-    body: "Drop files or pick a folder. AirLynk binds a tiny HTTP server to its LAN address on an ephemeral port — never 0.0.0.0.",
+    body: "Drop files or pick a folder. AerLynk binds a tiny HTTP server to its LAN address on an ephemeral port — never 0.0.0.0.",
     detail: "start_send_session(files)",
   },
   {
@@ -99,7 +99,7 @@ export const alternatives = [
   },
 ] as const;
 
-export const airLynkPoints = [
+export const aerLynkPoints = [
   "Device to device, across the room",
   "Original bytes, untouched and unthrottled",
   "256-bit CSPRNG session tokens",
@@ -125,7 +125,7 @@ export const audiences = [
   {
     id: "professionals",
     title: "Professionals",
-    body: "Contracts, scans, and photos that are contractually required to never touch a cloud. AirLynk makes that the default, not the workaround.",
+    body: "Contracts, scans, and photos that are contractually required to never touch a cloud. AerLynk makes that the default, not the workaround.",
   },
   {
     id: "teams",
@@ -162,7 +162,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Our lab machines have no internet access. AirLynk is the only tool we've found that works at all — because it never needed it.",
+      "Our lab machines have no internet access. AerLynk is the only tool we've found that works at all — because it never needed it.",
     name: "Priya N.",
     role: "Research assistant",
   },
@@ -175,7 +175,7 @@ export const faqs = [
   },
   {
     q: "Does it need internet access?",
-    a: "No. AirLynk speaks only to devices on your local network. It works fine on a Wi-Fi router with the WAN cable pulled out, or a phone hotspot with mobile data off.",
+    a: "No. AerLynk speaks only to devices on your local network. It works fine on a Wi-Fi router with the WAN cable pulled out, or a phone hotspot with mobile data off.",
   },
   {
     q: "Is it actually end-to-end encrypted?",
@@ -195,7 +195,7 @@ export const faqs = [
   },
   {
     q: "What does it cost?",
-    a: "Nothing, by design. AirLynk is MIT-licensed open source with no accounts — your name in the credits is the only account you'll ever need.",
+    a: "Nothing, by design. AerLynk is MIT-licensed open source with no accounts — your name in the credits is the only account you'll ever need.",
   },
 ] as const;
 

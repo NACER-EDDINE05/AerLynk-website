@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const TABS = [
-  { id: "send", label: "Send", caption: "Pick files. AirLynk stages them, generates a session, and shows a QR with the key sealed inside its fragment." },
+  { id: "send", label: "Send", caption: "Pick files. AerLynk stages them, generates a session, and shows a QR with the key sealed inside its fragment." },
   { id: "receive", label: "Receive", caption: "Or flip it around — the phone scans, uploads, and every payload lands in quarantine before it is authenticated." },
   { id: "history", label: "History", caption: "Every transfer, both directions, with sizes and outcomes. Locally stored — there is no 'cloud sync' to disable." },
 ] as const;
