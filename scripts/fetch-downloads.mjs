@@ -72,6 +72,16 @@ async function download(url, dest, token) {
   return body.length;
 }
 
+/**
+ * Legacy names used before the AerLynk rebrand. The v0.1.1 release assets are
+ * still uploaded as "AirLynk_*"; until they are renamed on GitHub Releases,
+ * fall back to the old repo/asset names (same bytes, digests are verified
+ * either way). Once the release is renamed, these fallbacks never trigger.
+ */
+const LEGACY_REPO = "NACER1-EDDINE/AirLynk";
+const legacyRepo = (repo) => (repo === LEGACY_REPO ? null : LEGACY_REPO);
+const legacyName = (file) => file.replace(/AerLynk/g, "AirLynk");
+
 const { tag, repo, assets } = readManifest();
 mkdirSync(DEST, { recursive: true });
 
@@ -93,15 +103,44 @@ for (const { file, sha256: expected } of assets) {
     unlinkSync(dest);
   }
 
-  const url = `https://github.com/${repo}/releases/download/${tag}/${file}`;
-  process.stdout.write(`  ↓ ${file} ... `);
-  const bytes = await download(url, dest, process.env.GITHUB_TOKEN);
+  /* Primary URL first, then legacy fallbacks (renamed repo, renamed assets,
+     or both still original). Duplicates collapse via the Set. */
+  const candidates = [
+    `https://github.com/${repo}/releases/download/${tag}/${file}`,
+    legacyRepo(repo) &&
+      `https://github.com/${legacyRepo(repo)}/releases/download/${tag}/${file}`,
+    legacyName(file) !== file &&
+      `https://github.com/${repo}/releases/download/${tag}/${legacyName(file)}`,
+    legacyRepo(repo) &&
+      legacyName(file) !== file &&
+      `https://github.com/${legacyRepo(repo)}/releases/download/${tag}/${legacyName(file)}`,
+  ].filter(Boolean);
+
+  let lastError = null;
+  let downloaded = 0;
+  let source = null;
+  for (const url of [...new Set(candidates)]) {
+    try {
+      process.stdout.write(`  ↓ ${file} ... `);
+      downloaded = await download(url, dest, process.env.GITHUB_TOKEN);
+      source = url;
+      break;
+    } catch (err) {
+      lastError = err;
+      process.stdout.write(`unavailable (${err.message})\n`);
+    }
+  }
+  if (!source) throw lastError;
+
   const actual = sha256(dest);
   if (actual !== expected) {
     unlinkSync(dest);
     throw new Error(`Digest mismatch for ${file}: expected ${expected}, got ${actual}`);
   }
-  console.log(`${(bytes / 1e6).toFixed(1)} MB — sha256 verified`);
+  console.log(
+    `  ✓ ${(downloaded / 1e6).toFixed(1)} MB — sha256 verified` +
+      (source === candidates[0] ? "" : ` (via legacy asset: ${source.split("/").pop()})`),
+  );
   fetched += 1;
 }
 
