@@ -1,8 +1,0 @@
-# Force correct content type for the metadata images — Next.js static export
-# writes them without a file extension, and Cloudflare Pages detects content
-# type from the extension (otherwise they'd serve as octet-stream).
-/opengraph-image
-  Content-Type: image/png
-
-/apple-icon
-  Content-Type: image/png

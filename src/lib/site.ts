@@ -7,18 +7,16 @@ export const site = {
   version: "0.1.1",
   url: "https://airlynk.dev",
   /**
-   * Public base URL of the Cloudflare R2 bucket that mirrors the installers.
+   * Optional external base URL for the installers (e.g. a CDN or object
+   * storage bucket). By default (""), the binaries live inside the deployment
+   * itself in public/downloads — see scripts/fetch-downloads.mjs, which pulls
+   * them from GitHub Releases at build time and verifies their digests.
    *
-   * The ~100 MB builds can't live in the static export / Cloudflare Pages
-   * (Pages caps a single asset at 25 MiB, and git caps repo files at 100 MB),
-   * so downloads are served from an R2 public bucket instead.
-   *
-   * Leave "" to keep serving from /public/downloads (the small v0.1.1 files).
-   * Configure once the bucket exists, e.g.:
-   *   "https://downloads.airlynk.dev"        <- custom domain on the bucket, or
-   *   "https://pub-XXXXXXXXXXXXXXXX.r2.dev"   <- auto-assigned R2.dev URL
+   * Only needed if a future build exceeds the host's static-file size limit
+   * (Vercel: 100 MB per static file on Hobby, 1 GB on Pro). Then set, e.g.:
+   *   "https://downloads.airlynk.dev"
    */
-  r2DownloadBase: "",
+  downloadCdnBase: "",
   repo: "https://github.com/NACER1-EDDINE/AirLynk",
   repoApi: "https://api.github.com/repos/NACER1-EDDINE/AirLynk",
   releases: "https://github.com/NACER1-EDDINE/AirLynk/releases",

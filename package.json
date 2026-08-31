@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "npx -y serve@14 out",
-    "deploy:pages": "npm run build && npx -y wrangler@3 pages deploy out --project-name airlynk-website",
-    "upload:downloads": "node scripts/upload-downloads.mjs"
+    "fetch:downloads": "node scripts/fetch-downloads.mjs",
+    "deploy:vercel": "npm run fetch:downloads && npx -y vercel@latest build --prod --yes && npx -y vercel@latest deploy --prebuilt --prod --yes"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",

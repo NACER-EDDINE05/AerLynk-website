@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages (+ mirror downloads to R2)
+name: Deploy to Vercel (downloads served from the deployment)
 
 on:
   push:
@@ -18,28 +18,32 @@ jobs:
 
       - run: npm ci
 
-      - name: Build static export
-        run: npm run build
-
-      - name: Upload installers to R2
+      # The installers are gitignored (repo cap: 100 MB per file) — pull them
+      # from GitHub Releases so they ship inside the Vercel deployment.
+      - name: Fetch release binaries
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/fetch-downloads.mjs
+
+      - name: Build with Vercel
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ] || [ -z "$R2_BUCKET" ]; then
-            echo "Cloudflare secrets not configured — skipping R2 upload"
+          if [ -z "$VERCEL_ORG_ID" ] || [ -z "$VERCEL_PROJECT_ID" ]; then
+            echo "Vercel secrets not configured — skipping (see README: Hosting on Vercel)"
             exit 0
           fi
-          node scripts/upload-downloads.mjs --bucket "$R2_BUCKET"
+          npx -y vercel@latest build --prod --yes
 
-      - name: Deploy site to Cloudflare Pages
+      - name: Deploy to Vercel
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "Cloudflare API token not configured — skipping Pages deploy"
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "VERCEL_TOKEN not configured — skipping (see README: Hosting on Vercel)"
             exit 0
           fi
-          npx wrangler@3 pages deploy out --project-name airlynk-website
+          npx -y vercel@latest deploy --prebuilt --prod --yes --token "$VERCEL_TOKEN"

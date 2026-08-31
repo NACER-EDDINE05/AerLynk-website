@@ -5,6 +5,9 @@ out
 next-env.d.ts
 .DS_Store
 
-# installer binaries — served from the Cloudflare R2 bucket, not from git
-# (repo files top out at 100 MB; Pages caps a single asset at 25 MiB)
+# installer binaries — not in git (repo files top out at 100 MB). They are
+# fetched from GitHub Releases at deploy time by scripts/fetch-downloads.mjs
+# and shipped inside the Vercel deployment.
 public/downloads/
+.wrangler/
+release-artifacts/

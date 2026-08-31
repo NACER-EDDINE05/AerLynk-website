@@ -26,57 +26,65 @@ src/
 
 ```bash
 npm install
-npm run dev     # local development
-npm run build   # production build — fully static, written to ./out
-npm run start   # serve the static ./out build locally (npx serve)
-npm run deploy:pages      # build + deploy ./out to Cloudflare Pages
-npm run upload:downloads  # push public/downloads/* to the R2 bucket (Mirrors)
+npm run dev             # local development
+npm run build           # production build — fully static, written to ./out
+npm run start           # serve the static ./out build locally (npx serve)
+npm run fetch:downloads # pull the release binaries from GitHub Releases into public/downloads
+npm run deploy:vercel   # fetch binaries + vercel build + deploy (needs `vercel login` or VERCEL_TOKEN)
 ```
 
 > **Note:** the site is a **static export** (`output: "export"` in `next.config.ts`),
 > so `next start` is replaced by `serve out`. There is no Node.js server at
-> runtime — this is what lets it run free and fast on Cloudflare Pages.
+> runtime — this is what lets it run free and fast on Vercel.
 
-## Hosting (Cloudflare Pages + R2)
+## Hosting (Vercel, downloads included)
 
-The site runs on **Cloudflare Pages**; the installer binaries — including the
-~100 MB builds — are served from a **Cloudflare R2 public bucket**, because:
+The site runs on **Vercel** as a static deployment, and the installer binaries
+are served **from the deployment itself** (`/downloads/<file>`) — no separate
+bucket needed. Relevant limits:
 
 | Where the file lives | Limit |
 |---|---|
 | git repo (GitHub) | 100 MB per file (hard) |
-| Cloudflare Pages asset | 25 MiB per file |
-| Cloudflare R2 public bucket | up to 5 TB per object, free egress |
+| Vercel static file | 100 MB per file (Hobby) · 1 GB (Pro) |
+| Largest current artifact | ~83 MB AppImage — fits |
+
+Because the binaries are gitignored (repo hygiene + GitHub's 100 MB cap), they
+are fetched at **deploy time** by `scripts/fetch-downloads.mjs`, which downloads
+them from GitHub Releases into `public/downloads/`, verifies each file's
+SHA-256 against the digests in `src/lib/downloads.ts`, and skips files that are
+already present with a matching digest.
 
 One-time setup:
 
-1. **Pages project** — create a Pages project named `airlynk-website` (or change
-   `--project-name` in `package.json` / `.github/workflows/deploy.yml`).
-2. **R2 bucket** — create a bucket (e.g. `airlynk-downloads`), enable **public
-   access** (use the auto `r2.dev` URL or connect a custom domain such as
-   `downloads.airlynk.dev`).
-3. **Point the site at it** — in `src/lib/site.ts` set `site.url` to your real
-   domain and `site.r2DownloadBase` to the bucket's public URL. The download
-   buttons then resolve to `https://downloads.airlynk.dev/<file>`.
-   Leave `r2DownloadBase: ""` to keep serving the small v0.1.1 files from
-   `/public/downloads` (self-hosted, but only works while the files are in the
-   deployment).
-4. **Upload the binaries** — `npm run upload:downloads -- --bucket airlynk-downloads`
-   (push everything in `public/downloads/` to `downloads/<file>`). Small builds
-   can also be dropped into the R2 dashboard by drag-and-drop.
-5. **GitHub Actions CI** (optional but recommended): configure repo secrets
-   `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, `R2_BUCKET`. Pushing to
-   `main` builds the site, uploads the downloads to R2, and deploys to Pages.
+1. **Create the Vercel project** — `npx vercel@latest link` (creates
+   `.vercel/project.json` with your org/project IDs) or import the repo at
+   vercel.com/new.
+2. **CI secrets** (for the GitHub Actions deploy): set
+   `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` (from `.vercel/project.json` or the
+   project dashboard) and a `VERCEL_TOKEN` (vercel.com → Account Settings →
+   Tokens). Pushing to `main` then fetches the binaries, builds, and deploys.
+   Missing secrets make the workflow skip gracefully.
+3. **Local deploys** — copy your local binaries into `public/downloads/` (or
+   let `fetch:downloads` fetch them), then `npm run deploy:vercel`.
+4. **Custom domain** — add it in the Vercel project settings and set
+   `site.url` in `src/lib/site.ts` so canonical/sitemap/OG URLs are correct.
 
-Files in `public/downloads/` are gitignored — keep them local/CI-only and let
-the R2 bucket be the source of truth for what visitors download.
+If a future build outgrows Vercel's per-file static limit, set
+`site.downloadCdnBase` (src/lib/site.ts) to an external CDN/bucket URL — the
+download buttons will resolve there instead of `/downloads/`. GitHub Releases
+stays linked as a secondary mirror on the download section either way.
+
+Files in `public/downloads/` are gitignored — the GitHub Release remains the
+source of truth for the binaries; the deployment serves them.
 
 ## Notes
 
 - The production URL, repo links, and version live in `src/lib/site.ts` — update
   `site.url` before deploying so canonical/sitemap/OG URLs are correct.
-- **Release binaries** are mirrored from the R2 bucket; when a new version
-  ships, replace the files, run `npm run upload:downloads`, and update the
-  filenames/sizes in `src/lib/downloads.ts`. GitHub Releases is linked as a mirror.
+- **Release binaries** are fetched into the deployment by
+  `npm run fetch:downloads`; when a new version ships, update the
+  filenames/sizes/digests in `src/lib/downloads.ts` and the script picks the
+  new files up automatically. GitHub Releases is linked as a secondary mirror.
 - The testimonials section is placeholder demo content, clearly labeled on the page.
 - The QR pattern in the product mockups is deliberately decorative and not scannable.

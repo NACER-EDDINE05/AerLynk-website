@@ -2,18 +2,20 @@ import { site } from "./site";
 
 /**
  * Downloadable release files, self-hosted from /public/downloads.
- * These are the v0.1.1 release artifacts; GitHub Releases acts as the mirror.
+ * These are the v0.1.1 release artifacts; GitHub Releases is kept as a
+ * secondary mirror (see the footnote on the download section).
  */
 export const latestTag = "v0.1.1";
 export const releaseUrl = `${site.repo}/releases/tag/${latestTag}`;
 
 /**
- * Served URL for a download: the R2 public bucket once site.r2DownloadBase is
- * set (this is where the big ~100 MB builds must live), otherwise the files
- * self-hosted in /public/downloads.
+ * Served URL for a download. By default the binaries ship inside the static
+ * deployment (public/downloads — populated by scripts/fetch-downloads.mjs);
+ * site.downloadCdnBase overrides this only if a future build outgrows the
+ * host's per-file static limit.
  */
 const resolvedHref = (file: string) =>
-  site.r2DownloadBase ? `${site.r2DownloadBase}/${file}` : `/downloads/${file}`;
+  site.downloadCdnBase ? `${site.downloadCdnBase}/${file}` : `/downloads/${file}`;
 
 export type Os = "windows" | "linux" | "macos";
 
@@ -36,7 +38,7 @@ export const windowsAssets: Asset[] = [
     size: "2.6 MB",
     href: resolvedHref("AirLynk_0.1.1_x64-setup.exe"),
     mirror: `${site.repo}/releases/download/${latestTag}/AirLynk_0.1.1_x64-setup.exe`,
-    sha256: "2cd7895c31e92fd55d3f7b9d21498535e18b1c5f57f2032f212e3367f850b22b",
+    sha256: "13d8bf5a94259e1106a8b1d6239c43e6913798bc56b7514181751771e75d571e",
   },
   {
     label: "MSI package",
@@ -44,7 +46,7 @@ export const windowsAssets: Asset[] = [
     size: "3.8 MB",
     href: resolvedHref("AirLynk_0.1.1_x64_en-US.msi"),
     mirror: `${site.repo}/releases/download/${latestTag}/AirLynk_0.1.1_x64_en-US.msi`,
-    sha256: "b65abafe70d8a8c6eb91a4382be0e7a8bdfb19849713256b0bbe3adb64f21935",
+    sha256: "6e0350bd0dce3601d7924436c71376ad7ee0648d901caf21d59287816b6c272b",
   },
   {
     label: "Portable",
