@@ -22,19 +22,24 @@ jobs:
         run: npm run build
 
       - name: Upload installers to R2
-        # Only runs once the Cloudflare secrets exist in the repo.
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' && secrets.R2_BUCKET != '' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
-        run: node scripts/upload-downloads.mjs --bucket "$R2_BUCKET"
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ] || [ -z "$R2_BUCKET" ]; then
+            echo "Cloudflare secrets not configured — skipping R2 upload"
+            exit 0
+          fi
+          node scripts/upload-downloads.mjs --bucket "$R2_BUCKET"
 
       - name: Deploy site to Cloudflare Pages
-        # Only runs once the Cloudflare API token secret is set.
-        if: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy out --project-name airlynk-website
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "Cloudflare API token not configured — skipping Pages deploy"
+            exit 0
+          fi
+          npx wrangler@3 pages deploy out --project-name airlynk-website
