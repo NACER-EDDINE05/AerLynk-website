@@ -143,7 +143,7 @@ function ReceiveMain() {
 
 function HistoryMain() {
   const rows = [
-    { dir: "↑", name: "aerlynk-0.1.1-setup.exe", meta: "82.4 MB · to phone · today 14:02" },
+    { dir: "↑", name: "aerlynk-0.1.2-setup.exe", meta: "82.4 MB · to phone · today 14:02" },
     { dir: "↓", name: "IMG_2026_0829.jpg", meta: "4.2 MB · from phone · today 09:41" },
     { dir: "↑", name: "group-photo-final.png", meta: "11.7 MB · to phone · yesterday" },
     { dir: "↓", name: "recording-042.m4a", meta: "38.0 MB · from phone · yesterday" },

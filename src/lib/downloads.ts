@@ -2,10 +2,10 @@ import { site } from "./site";
 
 /**
  * Downloadable release files, self-hosted from /public/downloads.
- * These are the v0.1.1 release artifacts; GitHub Releases is kept as a
+ * These are the v0.1.2 release artifacts; GitHub Releases is kept as a
  * secondary mirror (see the footnote on the download section).
  */
-export const latestTag = "v0.1.1";
+export const latestTag = "v0.1.2";
 export const releaseUrl = `${site.repo}/releases/tag/${latestTag}`;
 
 /**
@@ -35,26 +35,18 @@ export const windowsAssets: Asset[] = [
   {
     label: "Installer",
     note: "Recommended · upgrades in place",
-    size: "2.6 MB",
-    href: resolvedHref("AerLynk_0.1.1_x64-setup.exe"),
-    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.1_x64-setup.exe`,
-    sha256: "13d8bf5a94259e1106a8b1d6239c43e6913798bc56b7514181751771e75d571e",
+    size: "2.5 MB",
+    href: resolvedHref("AerLynk_0.1.2_x64-setup.exe"),
+    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.2_x64-setup.exe`,
+    sha256: "6ee25d5c4492945e58d51df7c5583845e246bb19ee0a35d22abf9afa3e49cc0f",
   },
   {
     label: "MSI package",
     note: "Managed / enterprise deployment",
-    size: "3.8 MB",
-    href: resolvedHref("AerLynk_0.1.1_x64_en-US.msi"),
-    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.1_x64_en-US.msi`,
-    sha256: "6e0350bd0dce3601d7924436c71376ad7ee0648d901caf21d59287816b6c272b",
-  },
-  {
-    label: "Portable",
-    note: "Standalone · no installation",
-    size: "11.1 MB",
-    href: resolvedHref("AerLynk_0.1.1_x64_portable.exe"),
-    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.1_x64_portable.exe`,
-    sha256: "e080c65fc274bf898fc5304a3928999bcf82ad9b3b0e92fe23b20ef118d07c3e",
+    size: "3.7 MB",
+    href: resolvedHref("AerLynk_0.1.2_x64_en-US.msi"),
+    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.2_x64_en-US.msi`,
+    sha256: "a5b57896c56f35a5d98fb66a73bbb374a9fefa33e9c6eab76d63a771592c87e0",
   },
 ];
 
@@ -63,25 +55,25 @@ export const linuxAssets: Asset[] = [
     label: "AppImage",
     note: "Any distro · chmod +x and run",
     size: "78.8 MB",
-    href: resolvedHref("AerLynk_0.1.1_amd64.AppImage"),
-    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.1_amd64.AppImage`,
-    sha256: "ff40add0e76eda285a11d97f97f5f523c0b6dfa9e6045008c9faa8a0f8c2e665",
+    href: resolvedHref("AerLynk_0.1.2_amd64.AppImage"),
+    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.2_amd64.AppImage`,
+    sha256: "baa99f6ae4729151bd75290799b1b01ce74a1144b8412bf3fb1be5a179f3e831",
   },
   {
     label: "RPM",
     note: "Fedora / RHEL · dnf install",
     size: "4.9 MB",
-    href: resolvedHref("AerLynk-0.1.1-1.x86_64.rpm"),
-    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk-0.1.1-1.x86_64.rpm`,
-    sha256: "5e56ef4c4f400ae9f1b6d55c9cbaac8c41a8cc5bad33dd76a605c580881adcd2",
+    href: resolvedHref("AerLynk-0.1.2-1.x86_64.rpm"),
+    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk-0.1.2-1.x86_64.rpm`,
+    sha256: "459f859c6c59a714d35643c77708d297353bfe04cad59a5a25eacafd1b8ab662",
   },
   {
     label: "DEB",
     note: "Ubuntu / Debian · apt install",
     size: "4.9 MB",
-    href: resolvedHref("AerLynk_0.1.1_amd64.deb"),
-    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.1_amd64.deb`,
-    sha256: "51a0536117ecb0f8d38099860ad0b72fbc926ab6890d7659eb29633ccbaf657a",
+    href: resolvedHref("AerLynk_0.1.2_amd64.deb"),
+    mirror: `${site.repo}/releases/download/${latestTag}/AerLynk_0.1.2_amd64.deb`,
+    sha256: "59b3730b70b03ddd73e5f1e251b9a430cf3667e51780e0333d74fe57c79c1716",
   },
 ];
 

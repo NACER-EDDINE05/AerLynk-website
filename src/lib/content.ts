@@ -187,7 +187,7 @@ export const faqs = [
   },
   {
     q: "Which platforms are supported?",
-    a: "Windows 10/11 (installer, MSI, or portable) and Linux — RPM for Fedora/RHEL, DEB for Ubuntu/Debian, and an AppImage for everything else.",
+    a: "Windows 10/11 (installer or MSI) and Linux — RPM for Fedora/RHEL, DEB for Ubuntu/Debian, and an AppImage for everything else.",
   },
   {
     q: "What if someone else scans my QR code?",
