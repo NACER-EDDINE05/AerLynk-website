@@ -6,7 +6,15 @@
       "headers": [{ "key": "Content-Type", "value": "image/png" }]
     },
     {
+      "source": "/opengraph-image/",
+      "headers": [{ "key": "Content-Type", "value": "image/png" }]
+    },
+    {
       "source": "/apple-icon",
+      "headers": [{ "key": "Content-Type", "value": "image/png" }]
+    },
+    {
+      "source": "/apple-icon/",
       "headers": [{ "key": "Content-Type", "value": "image/png" }]
     },
     {
