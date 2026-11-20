@@ -1,10 +1,16 @@
 import { ImageResponse } from "next/og";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 /* Static export: generate apple-icon.png once at build time. */
 export const dynamic = "force-static";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
+
+const emblem = `data:image/png;base64,${readFileSync(
+  join(process.cwd(), "public/aerlynk-emblem.png"),
+).toString("base64")}`;
 
 export default function AppleIcon() {
   return new ImageResponse(
@@ -16,20 +22,10 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #4d7dff, #1fa7d9)",
-          borderRadius: 40,
+          background: "#f3efe4",
         }}
       >
-        <svg width="110" height="110" viewBox="0 0 32 32">
-          <path
-            d="M9 21.5 16 9l7 12.5M11.6 17h8.8"
-            stroke="#fff"
-            strokeWidth="2.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            fill="none"
-          />
-        </svg>
+        <img width={158} height={158} src={emblem} alt="" />
       </div>
     ),
     size,

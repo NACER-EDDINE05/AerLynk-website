@@ -13,6 +13,9 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     background_color: "#06080d",
     theme_color: "#06080d",
-    icons: [{ src: "/icon.svg", sizes: "any", type: "image/svg+xml" }],
+    icons: [
+      { src: "/icon.png", sizes: "192x192", type: "image/png" },
+      { src: "/aerlynk-emblem.png", sizes: "512x512", type: "image/png" },
+    ],
   };
 }
